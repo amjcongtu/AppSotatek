@@ -145,7 +145,7 @@ export class AppComponent {
         if (!text) {
           this.dataTask = this.dataTaskOrigin;
         } else {
-          this.dataTask = _.filter(this.dataTaskOrigin, (item:any) => {
+          this.dataTask = _.filter(this.dataTaskOrigin, (item: any) => {
             return text.toLowerCase().indexOf(item.name.toLowerCase()) > -1
           });
         }
@@ -154,7 +154,7 @@ export class AppComponent {
   }
   // funcion view detail
   showDetail = (id: any) => {
-    let index = _.findIndex(this.dataTask,  (item:any) => {
+    let index = _.findIndex(this.dataTask, (item: any) => {
       return item.id === id;
     });
     if (index > -1) {
@@ -163,7 +163,7 @@ export class AppComponent {
   }
   // funcion remove
   removeTask = (id: any) => {
-    let index = _.findIndex(this.dataTask,  (item:any) => {
+    let index = _.findIndex(this.dataTask, (item: any) => {
       return item.id === id;
     })
     this.dataTask.splice(index, 1);
@@ -174,28 +174,30 @@ export class AppComponent {
     // checked
     if (e.target.checked) {
       lstChecked.push(new FormControl(e.target.value));
+      this.flagShowBulk = true;
     } else {
       // unchecked
       let i: number = 0;
       lstChecked.controls.forEach((item: any) => {
         if (item.value == e.target.value) {
           lstChecked.removeAt(i);
+          this.flagShowBulk = false;
           return;
         }
         i++;
       });
     }
     this.lstDeleteIds = lstChecked && lstChecked.value ? lstChecked.value : null;
-    this.flagShowBulk = this.lstDeleteIds && this.lstDeleteIds.length > 0 ? true : false;
   };
   // remove item begin checked
   removeItem() {
     for (let i = 0; i < this.lstDeleteIds.length; i++) {
-      let index = _.findIndex(this.dataTask,  (ele:any) => {
+      let index = _.findIndex(this.dataTask, (ele: any) => {
         return ele.id == this.lstDeleteIds[i]
       });
       if (index > -1) {
         this.dataTask.splice(index, 1);
+        this.flagShowBulk = false;
       }
     }
   };
@@ -203,7 +205,7 @@ export class AppComponent {
   updateData = (data: any, id: any) => {
     let dateNow = moment().format('DD/MM/YYYY');
     let dueDate = moment(data.date).format('DD/MM/YYYY')
-    let index = _.findIndex(this.dataTask, (item:any) => {
+    let index = _.findIndex(this.dataTask, (item: any) => {
       return item.id === id
     });
     if (index > -1) {
@@ -221,7 +223,10 @@ export class AppComponent {
         this.dataTask[index].description = data.description;
         this.dataTask[index].date = data.date;
         this.dataTask[index].piority = data.piority;
+        this.dataTask = _.orderBy(this.dataTask, ['date'], ['desc']);
         this.toaster.open({ text: 'Update success', duration: 2000, type: 'success' });
+        this.editForm.markAsUntouched();
+        this.editForm.markAsPristine();
       }
     }
   }
