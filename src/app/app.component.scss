@@ -1,0 +1,435 @@
+
+
+* {
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+.app-content {
+    width: 100%;
+    display: block;
+    float: left;
+    clear: both;
+    h4.card-new,
+    h4.card-todo {
+        text-align: center;
+    }
+    h4.card-todo {
+        margin: 20px;
+    }
+    form {
+        width: 100%;
+        display: block;
+        float: left;
+        clear: both;
+        .main-content {
+            width: 100%;
+            display: block;
+            float: left;
+            clear: both;
+            .full-width {
+                width: 100%;
+                display: block;
+                float: left;
+                clear: both;
+                .col-sm-5 {
+                    flex: 0 0 34%;
+                    max-width: 34%;
+                    width: 34%;
+                    padding: 20px 0;
+                    float: left;
+                    border: 1px solid #333;
+                    input {
+                        padding: 0 0 0 5px;
+                    }
+                    textarea {
+                        padding: 5px 0 0 5px;
+                    }
+                }
+                .col-sm-7 {
+                    flex: 0 0 65%;
+                    max-width: 65%;
+                    width: 65%;
+                    float: left;
+                    border-top: 1px solid #333;
+                    border-right: 1px solid #333;
+                    border-bottom: 1px solid #333;
+                    border-left: 1px solid #333;
+                    textarea,
+                    input[type="text"],
+                    input[type="date"],
+                    select,
+                    textarea {
+                        width: 100%;
+                        padding-left: 10px;
+                        border: 1px solid #333;
+                        height: 29px !important;
+                        outline: none;
+                        &:focus,
+                        &:active,
+                        &:hover {
+                            border: 1px solid #007bff;
+                        }
+                    }
+
+                    input.ng-touched {
+                        width: 100%;
+                    }
+                    label.e-float-text {
+                        width: 100%;
+                        display: block;
+                        margin: 10px 0px;
+                    }
+                }
+                .flex-around {
+                    display: flex;
+                    justify-content: space-around;
+                    padding-right: 15px;
+                    padding-left: 15px;
+                    margin-bottom: 20px;
+                    .col-sm-6 {
+                        padding: 0;
+                        select {
+                            height: 29px !important;
+                        }
+                        input[type="date"] {
+                            width: 90% !important;
+                        }
+                    }
+                }
+            }
+
+            .card-content.task {
+                .full-width {
+                    display: flex;
+                    flex-wrap: wrap;
+                    margin: 0;
+                    .col-sm-6 {
+                        position: relative;
+                        width: 100%;
+                        .form-group {
+                            .e-float-input {
+                                input,
+                                select {
+                                    font-size: 14px;
+                                }
+                                .ng-invalid.ng-touched {
+                                    border: 1px solid red;
+                                }
+                                textarea,
+                                input,
+                                select,
+                                textarea {
+                                    width: 100%;
+                                    border: 1px solid #333;
+                                    outline: none;
+                                    font-size: 14px;
+                                    &:focus,
+                                    &:active,
+                                    &:hover {
+                                        border: 1px solid #007bff;
+                                    }
+                                }
+                                input.ng-touched {
+                                    width: 100%;
+                                }
+                                label.e-float-text {
+                                    width: 100%;
+                                    display: block;
+                                    margin: 10px 0px;
+                                    font-weight: 600;
+                                    font-size: 14px;
+                                }
+                                label.e-float-text.required {
+                                    &::after {
+                                        color: red;
+                                        content: " *";
+                                    }
+                                }
+                                .input-error {
+                                    color: red !important;
+                                    font-size: 12px;
+                                    margin-top: 5px;
+                                    width: 100%;
+                                }
+                            }
+                        }
+                    }
+                    .col-sm-12 {
+                        position: relative;
+                        width: 100%;
+                        padding-right: 15px;
+                        padding-left: 15px;
+                        .form-group {
+                            .e-float-input {
+                                input,
+                                select {
+                                    height: 27px;
+                                    font-size: 14px;
+                                    padding-left: 5px;
+                                }
+                                .ng-invalid.ng-touched {
+                                    border: 1px solid red;
+                                }
+                                textarea,
+                                input,
+                                select {
+                                    width: 100%;
+                                    border: 1px solid #333;
+                                    outline: none;
+                                    font-size: 14px;
+                                    &:focus,
+                                    &:active,
+                                    &:hover {
+                                        border: 1px solid #007bff;
+                                    }
+                                }
+                                input.ng-touched {
+                                    width: 100%;
+                                }
+                                label.e-float-text {
+                                    width: 100%;
+                                    display: block;
+                                    margin: 10px 0px;
+                                    font-weight: 600;
+                                    font-size: 14px;
+                                }
+                                label.e-float-text.required {
+                                    &::after {
+                                        color: red;
+                                        content: " *";
+                                    }
+                                }
+                                .input-error {
+                                    color: red !important;
+                                    font-size: 12px;
+                                    margin-top: 5px;
+                                    width: 100%;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .card-content.todo {
+                .search {
+                    .col-sm-12 {
+                        .input {
+                            padding: 0 !important;
+                        }
+                    }
+                }
+                .full-width {
+                    display: flex;
+                    flex-wrap: wrap;
+                    margin: 0;
+                    width: 100%;
+                    float: left;
+                    clear: both;
+                    .col-sm-12 {
+                        position: relative;
+                        width: 100%;
+                        padding: 0 50px;
+                    }
+                    input.search {
+                        padding-left: 10px;
+                        margin-bottom: 20px;
+                        padding: 0 0 0 5px;
+                    }
+                    .card-body {
+                        width: 100%;
+                        margin-bottom: 20px;
+                        padding: 20px 50px;
+                        .name {
+                            width: 100%;
+                            border: 1px solid #333;
+                            .col-sm-12 {
+                                display: flex;
+                                align-items: center;
+                                padding: 15px;
+                                margin: 10px 0;
+                                input {
+                                    padding: 0 0 0 5px;
+                                }
+                                .checkbox {
+                                    width: 30%;
+                                    display: flex;
+                                    align-items: center;
+                                    input[type="checkbox"] {
+                                        margin-right: 10px;
+                                    }
+                                }
+                                .action {
+                                    width: 70%;
+                                    text-align: right;
+                                    margin-right: 32px;
+                                    button.btn-blue {
+                                        margin-right: 10px;
+                                    }
+                                }
+                            }
+                        }
+                        .data {
+                            width: 100%;
+                            display: block;
+                            float: left;
+                            .full-width {
+                                border-right: 1px solid #333;
+                                border-left: 1px solid #333;
+                                border-bottom: 1px solid #333;
+                                width: 100%;
+                                padding: 20px 0;
+                            }
+                            .col-sm-12 {
+                                label.e-float-text {
+                                    font-weight: 700;
+                                    font-size: 14px;
+                                }
+                                input {
+                                    width: 100%;
+                                    border: 1px solid #333;
+                                    height: 27px !important;
+                                    outline: none;
+                                    padding: 0 0 0 5px !important;
+                                }
+                                textarea {
+                                    height: 85px !important;
+                                    padding: 5px 0 0 5px !important;
+                                }
+                                select {
+                                    margin-bottom: 10px;
+                                    padding: 0 0 0 5px !important;
+                                }
+                            }
+                            .piority {
+                                margin-right: -10px;
+                            }
+                        }
+                    }
+                }
+                .bulk-action {
+                    border: 1px solid #333;
+                    padding: 20px 0;
+                    .text-bulk {
+                        width: 30%;
+                        float: left;
+                    }
+                    .action-bulk {
+                        width: 70%;
+                        float: left;
+                        text-align: right;
+                        button.btn-red {
+                            margin-left: 10px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    button.btn-red {
+        background: #d9534f;
+        color: #fff;
+        font-size: 14px;
+        margin: auto;
+        width: 150px;
+        border: none;
+        outline: none;
+        padding: 5px 20px;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+    button.btn-green {
+        background: #5cb85c;
+        color: #fff;
+        font-size: 14px;
+        margin: auto;
+        width: 150px;
+        border: none;
+        outline: none;
+        padding: 5px 20px;
+        cursor: pointer;
+        border-radius: 5px;
+        display: block;
+    }
+    button.btn-blue {
+        background: #00bcd4;
+        color: #fff;
+        font-size: 14px;
+        margin: auto;
+        width: 150px;
+        border: none;
+        outline: none;
+        padding: 5px 20px;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+    button:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+}
+
+@media only screen and (min-width: 360px) and (max-width: 767px) {
+    .app-content {
+        h4.card-todo {
+            margin-top: 20px;
+        }
+        form {
+            .main-content {
+                .full-width {
+                    .col-sm-5 {
+                        flex: 0 0 100%;
+                        max-width: 100%;
+                        width: 100%;
+                    }
+                    .col-sm-7 {
+                        flex: 0 0 100%;
+                        max-width: 100%;
+                        width: 100%;
+                    }
+                }
+                .card-body {
+                    padding: 0 !important;
+                    padding: 20px 0 !important;
+                    border-top: 1px solid #333;
+                    border-bottom: 1px solid #333;
+                    margin-bottom: 0 !important;
+                    .name {
+                        padding: 0 0 20px 0 !important;
+                        border: none !important;
+                        border-bottom: 1px solid #333 !important;
+                        .col-sm-12 {
+                            display: block !important;
+                            text-align: center;
+                            padding: 0 !important;
+                            margin: 0 !important;
+                        }
+                        .action {
+                            width: 100% !important;
+                            display: block !important;
+                            text-align: center !important;
+                        }
+                        .checkbox{
+                            width: 100% !important;
+                            display: block !important;
+                            text-align: left !important;
+                            padding: 0 15px 15px 15px !important;
+                        }
+                    }
+                    .data {
+                        width: 100%;
+                        display: block !important;
+                        float: left !important;
+                        padding: 0 !important;
+                        .full-width {
+                            border: none !important;
+                        }
+                    }
+                }
+                .bulk-action{
+                    border: none !important;
+                }
+            }
+        }
+    }
+}
