@@ -1,8 +1,10 @@
 import { Component, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
+import { SotatekService } from "src/service/app.service";
 import { Toaster } from 'ngx-toast-notifications';
 import * as moment from "moment";
 import * as _ from "lodash";
+import { Work } from 'src/model/Work';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -47,7 +49,9 @@ export class AppComponent {
   constructor(
     private _formBuilder: FormBuilder,
     private el: ElementRef,
-    private toaster: Toaster
+    private toaster: Toaster,
+    private _sotatekService: SotatekService,
+
   ) {
     //formGroup
     this.editForm = this._formBuilder.group({
@@ -87,10 +91,9 @@ export class AppComponent {
       // fake id
       this.model.id = Math.floor(Math.random() * Math.floor(99999));
       this.model.title = this.model.name;
-      this.dataTask.push(this.model);
-      // sort data descending dueDate
-      this.dataTask = _.orderBy(this.dataTask, ['date'], ['desc']);
-      this.dataTaskOrigin = _.clone(this.dataTask)
+      this._sotatekService.model.next({
+        data: this.model
+      });
       // clear model begin add
       this.clearModel();
       // default value begin add
@@ -138,104 +141,4 @@ export class AppComponent {
   clearModel() {
     this.model = new Work();
   }
-  // funcion search
-  searchListEnter = (e: any, text: any) => {
-    setTimeout(() => {
-      if (e.keyCode === 13) {
-        if (!text) {
-          this.dataTask = this.dataTaskOrigin;
-        } else {
-          this.dataTask = _.filter(this.dataTaskOrigin, (item: any) => {
-            return text.toLowerCase().indexOf(item.name.toLowerCase()) > -1
-          });
-        }
-      }
-    }, 200)
-  }
-  // funcion view detail
-  showDetail = (id: any) => {
-    let index = _.findIndex(this.dataTask, (item: any) => {
-      return item.id === id;
-    });
-    if (index > -1) {
-      this.dataTask[index].show = true;
-    }
-  }
-  // funcion remove
-  removeTask = (id: any) => {
-    let index = _.findIndex(this.dataTask, (item: any) => {
-      return item.id === id;
-    })
-    this.dataTask.splice(index, 1);
-  }
-  // checkbox
-  changeCheckBox(e: any) {
-    const lstChecked: FormArray = this.editForm.get('lstChecked') as FormArray;
-    // checked
-    if (e.target.checked) {
-      lstChecked.push(new FormControl(e.target.value));
-      this.flagShowBulk = true;
-    } else {
-      // unchecked
-      let i: number = 0;
-      lstChecked.controls.forEach((item: any) => {
-        if (item.value == e.target.value) {
-          lstChecked.removeAt(i);
-          this.flagShowBulk = false;
-          return;
-        }
-        i++;
-      });
-    }
-    this.lstDeleteIds = lstChecked && lstChecked.value ? lstChecked.value : null;
-  };
-  // remove item begin checked
-  removeItem() {
-    for (let i = 0; i < this.lstDeleteIds.length; i++) {
-      let index = _.findIndex(this.dataTask, (ele: any) => {
-        return ele.id == this.lstDeleteIds[i]
-      });
-      if (index > -1) {
-        this.dataTask.splice(index, 1);
-        this.flagShowBulk = false;
-      }
-    }
-  };
-  // update data
-  updateData = (data: any, id: any) => {
-    let dateNow = moment().format('DD/MM/YYYY');
-    let dueDate = moment(data.date).format('DD/MM/YYYY')
-    let index = _.findIndex(this.dataTask, (item: any) => {
-      return item.id === id
-    });
-    if (index > -1) {
-      if (!this.dataTask[index].name) {
-        this.toaster.open({ text: 'Task has required!', duration: 2000, type: 'danger' });
-        return;
-      }
-      else if (moment(dueDate, 'DD/MM/YYYY').isBefore(moment(dateNow, 'DD/MM/YYYY'))) {
-        this.toaster.open({ text: 'Due date greater than or equal to current date in position!', duration: 2000, type: 'warning' });
-        return;
-      }
-      else {
-        this.dataTask[index].name = data.name;
-        this.dataTask[index].title = data.name;
-        this.dataTask[index].description = data.description;
-        this.dataTask[index].date = data.date;
-        this.dataTask[index].piority = data.piority;
-        this.dataTask = _.orderBy(this.dataTask, ['date'], ['desc']);
-        this.toaster.open({ text: 'Update success', duration: 2000, type: 'success' });
-        this.editForm.markAsUntouched();
-        this.editForm.markAsPristine();
-      }
-    }
-  }
 }
-export class Work {
-  id?: number;
-  name?: string;
-  title?: string;
-  description?: string;
-  date?: any;
-  piority?: any
-};

@@ -10,8 +10,8 @@
     display: block;
     float: left;
     clear: both;
-    h4.card-new,
-    h4.card-todo {
+    h4.card-new
+     {
         text-align: center;
     }
     h4.card-todo {
@@ -98,7 +98,6 @@
                     }
                 }
             }
-
             .card-content.task {
                 .full-width {
                     display: flex;
@@ -211,119 +210,6 @@
                     }
                 }
             }
-            .card-content.todo {
-                .search {
-                    .col-sm-12 {
-                        .input {
-                            padding: 0 !important;
-                        }
-                    }
-                }
-                .full-width {
-                    display: flex;
-                    flex-wrap: wrap;
-                    margin: 0;
-                    width: 100%;
-                    float: left;
-                    clear: both;
-                    .col-sm-12 {
-                        position: relative;
-                        width: 100%;
-                        padding: 0 50px;
-                    }
-                    input.search {
-                        padding-left: 10px;
-                        margin-bottom: 20px;
-                        padding: 0 0 0 5px;
-                    }
-                    .card-body {
-                        width: 100%;
-                        margin-bottom: 20px;
-                        padding: 20px 50px;
-                        .name {
-                            width: 100%;
-                            border: 1px solid #333;
-                            .col-sm-12 {
-                                display: flex;
-                                align-items: center;
-                                padding: 15px;
-                                margin: 10px 0;
-                                input {
-                                    padding: 0 0 0 5px;
-                                }
-                                .checkbox {
-                                    width: 30%;
-                                    display: flex;
-                                    align-items: center;
-                                    input[type="checkbox"] {
-                                        margin-right: 10px;
-                                    }
-                                }
-                                .action {
-                                    width: 70%;
-                                    text-align: right;
-                                    margin-right: 32px;
-                                    button.btn-blue {
-                                        margin-right: 10px;
-                                    }
-                                }
-                            }
-                        }
-                        .data {
-                            width: 100%;
-                            display: block;
-                            float: left;
-                            .full-width {
-                                border-right: 1px solid #333;
-                                border-left: 1px solid #333;
-                                border-bottom: 1px solid #333;
-                                width: 100%;
-                                padding: 20px 0;
-                            }
-                            .col-sm-12 {
-                                label.e-float-text {
-                                    font-weight: 700;
-                                    font-size: 14px;
-                                }
-                                input {
-                                    width: 100%;
-                                    border: 1px solid #333;
-                                    height: 27px !important;
-                                    outline: none;
-                                    padding: 0 0 0 5px !important;
-                                }
-                                textarea {
-                                    height: 85px !important;
-                                    padding: 5px 0 0 5px !important;
-                                }
-                                select {
-                                    margin-bottom: 10px;
-                                    padding: 0 0 0 5px !important;
-                                }
-                            }
-                            .piority {
-                                margin-right: -10px;
-                            }
-                        }
-                    }
-                }
-                .bulk-action {
-                    border-top: 1px solid #333;
-                    padding: 20px 0;
-                    .text-bulk {
-                        width: 30%;
-                        float: left;
-                    }
-                    .action-bulk {
-                        width: 70%;
-                        float: left;
-                        text-align: right;
-                        button.btn-red {
-                            margin-left: 10px;
-                        }
-                    }
-                }
-            }
         }
     }
     button.btn-red {
@@ -367,7 +253,9 @@
         opacity: 0.5;
         cursor: not-allowed;
     }
+  
 }
+
 
 @media only screen and (min-width: 360px) and (max-width: 767px) {
     .app-content {
@@ -432,4 +320,5 @@
             }
         }
     }
+
 }
