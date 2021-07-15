@@ -1,0 +1,92 @@
+
+<div class="col-sm-5">
+  <div class="app-content">
+    <form name="editForm" [formGroup]="editForm" novalidate>
+      <div class="main-content">
+        <div class="full-width">
+            <div class="card-content task">
+              <h4 class="card-new">New Task</h4>
+              <div class="full-width">
+                <!-- name -->
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <div class="e-float-input">
+                      <label class="e-float-text required" for="name">Task</label>
+                      <input type="text" id="name" name="name" formControlName="name" [(ngModel)]="model.name"
+                        placeholder="Add new task ..." title="{{ model.name ? model.name : '' }}">
+                      <span class="e-float-line"></span>
+                      <div
+                        *ngIf="editForm.controls['name'].invalid && (editForm.controls['name'].dirty || editForm.controls['name'].touched)"
+                        class="input-error">
+                        <div *ngIf="editForm.controls['name'].errors?.required">
+                          Task has required
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- description -->
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <div class="e-float-input">
+                      <label class="e-float-text" for="description">Description</label>
+                      <textarea type="text" id="description" name="description" full-widths="5"
+                        [(ngModel)]="model.description" formControlName="description"
+                        title="{{ model.description }}"></textarea>
+                      <span class="e-float-line"></span>
+                    </div>
+                  </div>
+                </div>
+  
+              </div>
+              <div class="full-width">
+                <!-- date -->
+                <div class="col-sm-12 flex-around">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <div class="e-float-input">
+                        <label class="e-float-text" for="description">Due Date </label>
+                        <input type="date" class="form-control" id="date" name="date" [(ngModel)]="model.date"
+                          (blur)="checkDueDate()" change="checkDueDate()" formControlName="date">
+                        <span class="e-float-line required"></span>
+                        <div class="input-error"
+                          *ngIf="editForm.controls['date'].invalid && (editForm.controls['date'].dirty || editForm.controls['date'].touched)">
+                          <div *ngIf="editForm.controls['date'].errors?.required">
+                            Due Date has required
+                          </div>
+                        </div>
+                        <div class="input-error"
+                          *ngIf="editForm.controls['date'].invalid && (editForm.controls['date'].dirty || editForm.controls['date'].touched)">
+                          <div *ngIf="editForm.controls['date'].errors?.errDueDate">
+                            Due date greater than or equal to current date
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- piority -->
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <div class="e-float-input">
+                        <label class="e-float-text" for="piority"> Piority</label>
+                        <select class="form-control" formControlName="piority" [(ngModel)]='model.piority'>
+                          <option *ngFor="let item of lstPiorty;let i = index" [value]="item.code">
+                            {{item.name}}</option>
+                        </select>
+                        <span class="e-float-line"></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+  
+              </div>
+              <div class="full-width">
+                <button type="button" class="btn-green" (click)="addTask()">Add</button>
+              </div>
+            </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+

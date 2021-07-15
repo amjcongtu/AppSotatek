@@ -5,12 +5,15 @@ import * as moment from "moment";
 import * as _ from "lodash";
 import { SotatekService } from "src/service/app.service";
 import { Work } from 'src/model/Work';
+import { ActivatedRoute } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { getTaskById } from '../store/selector/task.selector';
 @Component({
-  selector: 'app-edit',
-  templateUrl: './app-edit.component.html',
-  styleUrls: ['./app-edit.component.scss']
+  selector: 'task-edit',
+  templateUrl: './task-edit.component.html',
+  styleUrls: ['./task-edit.component.scss']
 })
-export class AppEditComponent {
+export class TaskEditComponent {
   // declare variable
   public model: Work = new Work();
   public flagSetDefaultPiory: boolean = true;
@@ -50,7 +53,8 @@ export class AppEditComponent {
     private el: ElementRef,
     private toaster: Toaster,
     private _sotatekService: SotatekService,
-
+    private activeRoute: ActivatedRoute, 
+    private store: Store
 
   ) {
     //formGroup
@@ -68,6 +72,10 @@ export class AppEditComponent {
       this.dataTask.push(model);
       this.dataTask = _.orderBy(this.dataTask, ['date'], ['desc']);
       this.dataTaskOrigin = _.clone(this.dataTask)
+    });
+    //
+    this.store.select(state => state).subscribe(data => {
+      console.log('data', data);
     });
   };
 

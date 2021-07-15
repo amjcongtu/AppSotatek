@@ -3,7 +3,9 @@ export class Work {
     name?: string;
     title?: string;
     description?: string;
-    date?: any;
-    piority?: any
+    date?: string;
+    piority?: string;
+    state?:any;
+    data?:any;
   };
   

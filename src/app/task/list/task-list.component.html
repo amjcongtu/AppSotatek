@@ -1,0 +1,13 @@
+<div class="list">
+    <a [routerLink]="['/add']" routerLinkActive="router-link-active" >Add Task</a>
+    <ul>
+        <li *ngFor="let item of task | async ;let i = index">
+            <span>{{ i + 1}}.</span>
+            <span> {{item.name}}</span>
+            <span> {{item.id}}</span>
+            <a style="margin-left:10px" class="ml-5" (click)="getById(item)">update</a>
+            <a style="margin-left:10px" class="ml-5" (click)="delete(item.id)">delete</a>
+        </li>
+    </ul>
+</div>
+

@@ -1,0 +1,83 @@
+
+<div class="col-sm-7">
+    <div class="card-content todo">
+        <h4 class="card-todo">To Do List</h4>
+        <div class="full-width search">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <div class="e-float-input">
+                        <input [ngModelOptions]="{standalone: true}" [(ngModel)]="search.text" type="text" class="search"
+                            (keypress)="searchListEnter($event,search.text)" placeholder="Search ...">
+                        <span class="e-float-line"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="full-width">
+
+        </div>
+        <div class="full-width" *ngIf="dataTask && dataTask.length > 0">
+            <div class="card-body" *ngFor="let item of dataTask;let i = index">
+                <div class="border">
+                    <div class="name">
+                        <div class="col-sm-12">
+                            <div class="checkbox">
+                                <input type="checkbox" name="task" id="checkbox-{{item.id}}" [value]="item.id"
+                                    (change)="changeCheckBox($event)">
+                                {{item.title}}
+                            </div>
+                            <div class="action">
+                                <button class="btn-blue" type="button" (click)="showDetail(item.id)">Detail</button>
+                                <button class="btn-red" type="button" (click)="removeTask(item.id)">Remove</button>
+                            </div>
+    
+                        </div>
+                    </div>
+                    <div class="data" *ngIf="item.show ">
+                        <div class="full-width">
+                            <div class="col-sm-12">
+                                <label class="e-float-text" for="Task"> Task</label>
+                                <input class="form-control" type="text" [ngModelOptions]="{standalone: true}"
+                                    [(ngModel)]="item.name" title="{{ item.name ? item.name : '' }}">
+                            </div>
+                            <div class="col-sm-12">
+                                <label class="e-float-text" for="description">Description</label>
+                                <textarea class="form-control" type="text" [ngModelOptions]="{standalone: true}"
+                                    full-widths="5" [(ngModel)]="item.description"
+                                    title="{{ item.description }}"></textarea>
+                            </div>
+                            <div class="col-sm-12">
+                                <label class="e-float-text" for="description">Due Date</label>
+                                <input type="date" class="form-control" [ngModelOptions]="{standalone: true}"
+                                    [(ngModel)]="item.date">
+                            </div>
+                            <div class="col-sm-12 piority">
+                                <label class="e-float-text" for="piority">Piority</label>
+                                <select class="form-control" [ngModelOptions]="{standalone: true}"
+                                    [(ngModel)]='item.piority'>
+                                    <option *ngFor="let item of lstPiorty;let i = index" [value]="item.code">
+                                        {{item.name}}</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-12">
+                                <button type="button" class="btn-green" (click)="updateData(item,item.id)"
+                                    [disabled]="flagDisabledUpdate">Update</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="full-width bulk-action" *ngIf="flagShowBulk && dataTask.length > 0">
+            <div class="col-sm-12">
+                <div class="text-bulk">
+                    Bulk Action:
+                </div>
+                <div class="action-bulk">
+                    <button type="button" class="btn-blue" disabled>Done</button>
+                    <button type="button" class="btn-red" (click)="removeItem()">Remove</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
