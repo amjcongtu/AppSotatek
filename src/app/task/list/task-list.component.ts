@@ -28,7 +28,7 @@ export class TaskListComponent {
     this.task = this.store.select(getAllTask);
   };
   getById(data: any) {
-    this.router.navigate(["/edit/", data.id]);
+    this.router.navigate([`/edit/${data.id}`]);
   }
   delete(id: number) {
     this.store.dispatch(deleteTask({ id }));

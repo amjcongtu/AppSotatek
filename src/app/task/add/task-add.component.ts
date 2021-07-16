@@ -8,6 +8,7 @@ import { Work } from 'src/model/Work';
 import {Store} from '@ngrx/store';
 import {TaskState} from '../store/reducer/task.reducer';
 import { addTask } from '../store/action/task.action';
+import { Router } from '@angular/router';
 @Component({
   selector: 'task-add',
   templateUrl: './task-add.component.html',
@@ -53,6 +54,7 @@ export class TaskAddComponent {
     private _formBuilder: FormBuilder,
     private el: ElementRef,
     private toaster: Toaster,
+    private router: Router,
     private _sotatekService: SotatekService,
     private store: Store<TaskState>
 
@@ -100,21 +102,22 @@ export class TaskAddComponent {
       });
       // clear model begin add
       this.clearModel();
-      // default value begin add
-      // untouch form begin add
-      this.editForm.markAsUntouched();
-      this.editForm.markAsPristine();
+  
       // alert('Add success!')
       this.toaster.open({ text: 'Add success', duration: 4000, type: 'primary' });
-      const postObject: Work = {
-        title: this.editForm.value.title,
+      const taskObject: Work = {
         name: this.editForm.value.name,
         description: this.editForm.value.description,
         piority: this.editForm.value.piority,
         date: moment(this.editForm.value.date).format("DD/MM/YYYY"),
       }
-      this.store.dispatch(addTask({ task: postObject }));
+      this.store.dispatch(addTask({ task: taskObject }));
+      // default value begin add
+      this.editForm.markAsUntouched();
+      this.editForm.markAsPristine();
+      // untouch form begin add
       this.defaultValue();
+      // this.router.navigate(["/list"]);
     }
   };
   //funcion default value

@@ -10,25 +10,25 @@ const _taskReducer = createReducer(
     initialStateTask,
   on(TaskAction.addTask, (state: any, data: any) => {
     return {
-        task: [...state.task, data.task]
+        task: [...state.tasks, data.task]
     }
 }),
 on(TaskAction.updateTask, (state: any, data: any) => {
-    const post = state.posts.map((ele: any) => {
+    const post = state.tasks.map((ele: any) => {
         return ele.id == data.value.id ? data.value : ele;
     })
     return {
         ...state,
-        posts: post
+        tasks: post
     }
 }),
 on(TaskAction.deleteTask, (state: any, data: any) => {
-    const posts = state.posts.filter((ele: any) => {
+    const tasks = state.tasks.filter((ele: any) => {
         return ele.id !== data.id
     })
     return {
         ...state,
-        posts: posts
+        tasks: tasks
     }
 })
 )

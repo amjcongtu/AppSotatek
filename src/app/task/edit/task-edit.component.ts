@@ -8,6 +8,7 @@ import { Work } from 'src/model/Work';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { getTaskById } from '../store/selector/task.selector';
+import { map, switchMap } from "rxjs/operators";
 @Component({
   selector: 'task-edit',
   templateUrl: './task-edit.component.html',
@@ -54,9 +55,18 @@ export class TaskEditComponent {
     private toaster: Toaster,
     private _sotatekService: SotatekService,
     private activeRoute: ActivatedRoute, 
-    private store: Store
+    private store: Store,
 
   ) {
+    this.activeRoute.paramMap.pipe(
+      map((params: any) => params.get("id")),
+    ).subscribe(res => {
+      const x = this.store.select(getTaskById, res).subscribe((res: any) => {
+        this.model = Object.assign({}, res);
+      })
+      console.log(123,x);
+      x.unsubscribe();
+    })
     //formGroup
     this.editForm = this._formBuilder.group({
       name: ["", [Validators.required]],
